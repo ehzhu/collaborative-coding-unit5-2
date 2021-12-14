@@ -35,21 +35,33 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         `, hahah, 200, 0)
     music.pewPew.play()
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
-    otherSprite.destroy()
-    sprite.destroy(effects.fire, 500)
-})
 function changeScore (Score: number) {
     info.changeScoreBy(1)
     music.beamUp.play()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+info.onLifeZero(function () {
+    gap()
+})
+function gap () {
+    if (info.score() > goal) {
+        return "You reached your goal!"
+    } else {
+        return "You are " + (goal - info.score()) + "" + "your goal."
+    }
+}
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    sprite.destroy(effects.fire, 500)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.hearts, 500)
     info.changeLifeBy(-1)
 })
 let allien: Sprite = null
 let projectile: Sprite = null
 let hahah: Sprite = null
+let goal = 0
+goal = game.askForNumber("What is your goal score?")
 scene.setBackgroundColor(9)
 hahah = sprites.create(img`
     ........................
@@ -106,7 +118,7 @@ game.onUpdateInterval(500, function () {
         ........................
         ........................
         ........................
-        `, SpriteKind.Player)
+        `, SpriteKind.Enemy)
     allien.setVelocity(-100, 0)
     allien.setPosition(160, randint(0, 120))
 })
