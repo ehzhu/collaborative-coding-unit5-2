@@ -1,4 +1,3 @@
-let mySprite: Sprite = null
 scene.setBackgroundColor(9)
 let hahah = sprites.create(img`
     ........................
@@ -27,4 +26,4 @@ let hahah = sprites.create(img`
     ........cccccccc........
     `, SpriteKind.Player)
 controller.moveSprite(hahah, 200, 200)
-mySprite.setStayInScreen(true)
+hahah.setStayInScreen(true)
