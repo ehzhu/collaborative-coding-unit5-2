@@ -104,6 +104,6 @@ game.onUpdateInterval(500, function () {
         ........................
         ........................
         `, SpriteKind.Player)
-    allien.setVelocity(-100, randint(0, 120))
-    allien.setPosition(160, 0)
+    allien.setVelocity(-100, 0)
+    allien.setPosition(160, randint(0, 120))
 })
