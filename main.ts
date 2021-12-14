@@ -36,7 +36,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     music.pewPew.play()
 })
 function changeScore (score: number) {
-	
+    info.changeScoreBy(score)
+    music.beamUp.play()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
     otherSprite.destroy()
