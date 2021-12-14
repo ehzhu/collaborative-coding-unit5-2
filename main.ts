@@ -35,9 +35,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         `, hahah, 200, 0)
     music.pewPew.play()
 })
+function changeScore (score: number) {
+    info.changeScoreBy(score)
+    music.beamUp.play()
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
     otherSprite.destroy()
     sprite.startEffect(effects.fire, 500)
+    changeScore(1)
 })
 let allien: Sprite = null
 let projectile: Sprite = null
