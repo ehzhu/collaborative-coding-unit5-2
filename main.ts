@@ -1,3 +1,6 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
 	
 })
@@ -33,7 +36,6 @@ controller.moveSprite(hahah, 200, 200)
 hahah.setStayInScreen(true)
 info.setLife(3)
 game.onUpdateInterval(500, function () {
-    let mySprite: Sprite = null
     allien = sprites.create(img`
         ..............ffffff....
         .............f2feeeeff..
@@ -61,5 +63,5 @@ game.onUpdateInterval(500, function () {
         ........................
         `, SpriteKind.Player)
     allien.setVelocity(-100, randint(0, 120))
-    mySprite.setPosition(160, 0)
+    allien.setPosition(160, 0)
 })
