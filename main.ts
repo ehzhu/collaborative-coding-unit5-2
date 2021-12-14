@@ -27,3 +27,4 @@ let hahah = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(hahah, 200, 200)
 hahah.setStayInScreen(true)
+info.setLife(3)
