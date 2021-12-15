@@ -36,7 +36,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     music.pewPew.play()
 })
 function changeScore (Score: number) {
-    info.changeScoreBy(1)
+    info.changeScoreBy(Score)
     music.beamUp.play()
 }
 function gap () {
@@ -59,7 +59,7 @@ let allien: Sprite = null
 let projectile: Sprite = null
 let hahah: Sprite = null
 let goal = 0
-goal = game.askForNumber("What is your goal score?")
+goal = game.askForNumber("What is your goal score?", 3)
 scene.setBackgroundColor(9)
 hahah = sprites.create(img`
     ........................
@@ -90,6 +90,9 @@ hahah = sprites.create(img`
 controller.moveSprite(hahah, 200, 200)
 hahah.setStayInScreen(true)
 info.setLife(3)
+game.onUpdate(function () {
+	
+})
 game.onUpdateInterval(500, function () {
     allien = sprites.create(img`
         ..............ffffff....
@@ -119,7 +122,4 @@ game.onUpdateInterval(500, function () {
         `, SpriteKind.Enemy)
     allien.setVelocity(-100, 0)
     allien.setPosition(160, randint(0, 120))
-    while (info.life() == 0) {
-        gap()
-    }
 })
