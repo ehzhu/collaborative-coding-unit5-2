@@ -39,9 +39,6 @@ function changeScore (Score: number) {
     info.changeScoreBy(1)
     music.beamUp.play()
 }
-info.onLifeZero(function () {
-    gap()
-})
 function gap () {
     if (info.score() > goal) {
         return "You reached your goal!"
@@ -52,6 +49,7 @@ function gap () {
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
     sprite.destroy(effects.fire, 500)
+    changeScore(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.hearts, 500)
@@ -121,4 +119,7 @@ game.onUpdateInterval(500, function () {
         `, SpriteKind.Enemy)
     allien.setVelocity(-100, 0)
     allien.setPosition(160, randint(0, 120))
+    while (info.life() == 0) {
+        gap()
+    }
 })
