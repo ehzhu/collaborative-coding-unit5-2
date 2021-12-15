@@ -55,6 +55,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.destroy(effects.hearts, 500)
     info.changeLifeBy(-1)
 })
+let reachGoal = ""
 let allien: Sprite = null
 let projectile: Sprite = null
 let hahah: Sprite = null
@@ -90,9 +91,6 @@ hahah = sprites.create(img`
 controller.moveSprite(hahah, 200, 200)
 hahah.setStayInScreen(true)
 info.setLife(3)
-game.onUpdate(function () {
-	
-})
 game.onUpdateInterval(500, function () {
     allien = sprites.create(img`
         ..............ffffff....
@@ -122,4 +120,8 @@ game.onUpdateInterval(500, function () {
         `, SpriteKind.Enemy)
     allien.setVelocity(-100, 0)
     allien.setPosition(160, randint(0, 120))
+    if (info.life() == 0) {
+        reachGoal = gap()
+        game.splash(reachGoal)
+    }
 })
