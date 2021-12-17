@@ -39,11 +39,15 @@ function changeScore (Score: number) {
     info.changeScoreBy(Score)
     music.beamUp.play()
 }
+info.onLifeZero(function () {
+    reachGoal = gap()
+    game.splash(reachGoal)
+})
 function gap () {
-    if (info.score() > goal) {
+    if (info.score() > goal || info.score() == goal) {
         return "You reached your goal!"
     } else {
-        return "You are " + (goal - info.score()) + "" + "your goal."
+        return "You are " + (goal - info.score()) + " " + "away from your goal."
     }
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -55,8 +59,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.destroy(effects.hearts, 500)
     info.changeLifeBy(-1)
 })
-let reachGoal = ""
 let allien: Sprite = null
+let reachGoal = ""
 let projectile: Sprite = null
 let hahah: Sprite = null
 let goal = 0
@@ -67,17 +71,17 @@ hahah = sprites.create(img`
     ........................
     ........................
     ...........ccc..........
-    ...........cccc.........
-    .......ccc..ccccccc.....
-    .......cccccc555555cc...
-    ........ccb5555555555c..
-    .....cc..b555555555555c.
-    .....cccb55555bcc555555c
-    ......cb555555555c55d55c
-    ......b5555555555555555c
-    ...cc.b555dd5555bb1bbbc.
-    ....ccd55ddddd55bbb335c.
-    ...ccbddddddddd5bb3335c.
+    .......777.cccc.........
+    ......77777.ccccccc.....
+    .....7777777c555555cc...
+    ....77777777555555555c..
+    ...7777777755555555555c.
+    ..777777775555bcc555555c
+    .7777777755555555c55d55c
+    .7777777555555555555555c
+    ..77777555dd5555bb1bbbc.
+    ...777d55ddddd55bbb335c.
+    ...c7bddddddddd5bb3335c.
     .ccccdddddddddd55b3335c.
     cdcccdddddb55bbd553335c.
     cddbddddddb555bb55555c..
@@ -120,8 +124,4 @@ game.onUpdateInterval(500, function () {
         `, SpriteKind.Enemy)
     allien.setVelocity(-100, 0)
     allien.setPosition(160, randint(0, 120))
-    if (info.life() == 0) {
-        reachGoal = gap()
-        game.splash(reachGoal)
-    }
 })
